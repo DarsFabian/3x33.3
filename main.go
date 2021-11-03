@@ -9,11 +9,16 @@ import (
 	"syscall"
 
 	Discord "github.com/bwmarrin/discordgo"
+	Dotenv "github.com/joho/godotenv"
 )
 
 var BotUtils = utility.BotUtil{Token: ""}
 
 func main() {
+
+	Dotenv.Load()
+
+	BotUtils.Token = os.Getenv("DISCORD_TOKEN")
 
 	client, err := Discord.New("Bot " + BotUtils.Token)
 
@@ -30,6 +35,8 @@ func main() {
 		return
 	}
 
+	client.AddHandler(message.HandleMessages)
+
 	fmt.Println("Bot successfully connected to Discord. Press CTRL + C to end task.")
 
 	sc := make(chan os.Signal, 1)
@@ -37,5 +44,4 @@ func main() {
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
 	<-sc
 
-	client.AddHandler(message.HandleMessages)
 }

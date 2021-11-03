@@ -14,5 +14,7 @@ func HandleMessages(session *discordgo.Session, message *discordgo.MessageCreate
 
 	args := strings.Split(message.Content, " ")
 
-	Commands.CommandHandler[args[0]](&args)
+	if Commands.CommandHandler[args[0]] != nil {
+		Commands.CommandHandler[args[0]](&args, session, message)
+	}
 }

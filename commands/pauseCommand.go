@@ -1,5 +1,9 @@
 package Commands
 
-func PauseCommand(args *[]string) (bool, error) {
+import (
+	Discord "github.com/bwmarrin/discordgo"
+)
+
+func PauseCommand(args *[]string, session *Discord.Session, message *Discord.MessageCreate) (bool, error) {
 	return true, nil
 }

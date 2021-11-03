@@ -1,5 +1,9 @@
 package Commands
 
-func SkipCommand(args *[]string) (bool, error) {
+import (
+	Discord "github.com/bwmarrin/discordgo"
+)
+
+func SkipCommand(args *[]string, session *Discord.Session, message *Discord.MessageCreate) (bool, error) {
 	return true, nil
 }
