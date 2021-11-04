@@ -12,15 +12,13 @@ import (
 	Dotenv "github.com/joho/godotenv"
 )
 
-var BotUtils = utility.BotUtil{Token: ""}
-
 func main() {
 
 	Dotenv.Load()
 
-	BotUtils.Token = os.Getenv("DISCORD_TOKEN")
+	utility.BotUtils.Token = os.Getenv("DISCORD_TOKEN")
 
-	client, err := Discord.New("Bot " + BotUtils.Token)
+	client, err := Discord.New("Bot " + utility.BotUtils.Token)
 
 	if err != nil {
 		return
